@@ -1,0 +1,80 @@
+<!-- <h1>{{ title }}</h1> -->
+
+<!-- <ul> -->
+  <!-- <li *ngFor="let pers of personas">
+    <a *ngIf="pers.edad >= 18" >{{ pers.nombre }}</a>
+    <ng-container *ngIf="pers.edad >= 18"> {{pers.nombre}} </ng-container>
+  </li> -->
+  <!-- <ng-container *ngFor="let pers of personas">
+    <li *ngIf="pers.edad >= 18">{{ pers.nombre }}</li>
+  </ng-container>
+</ul> -->
+
+
+<div class="container">
+  <!-- Button Abrir Modal Agregar Producto -->
+  <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#modalAgregarProducto">
+    Agregar Producto
+  </button>
+
+  <div class="row">
+    <div class="col-12 col-md-4" *ngFor="let prod of productoModelGet">
+      <div class="card text-center mb-3">
+        <div class="card-header">
+          {{ prod._id }}
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">{{prod.nombre}}</h5>
+          <p class="card-text">
+            La cantidad existen es: {{ prod.cantidad }} y su precio es de: {{ prod.precio }}
+          </p>
+
+        </div>
+        <div class="card-footer text-muted">
+          <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+            <button type="button" class="btn btn-danger" (click)="deleteProductos(prod._id)">Eliminar</button>
+            <button type="button" class="btn btn-warning">Editar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Modal Agregar Producto -->
+<div class="modal fade" id="modalAgregarProducto" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Agregar Producto</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="inputNombre" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="inputNombre" name="nombre" #nombre="ngModel"
+            [(ngModel)]="productoModelPost.nombre">
+          </div>
+          <div class="mb-3">
+            <label for="inputCantidad" class="form-label">Cantidad</label>
+            <input type="text" class="form-control" id="inputCantidad" name="cantidad" #cantidad="ngModel"
+            [(ngModel)]="productoModelPost.cantidad">
+          </div>
+          <div class="mb-3">
+            <label for="inputPrecio" class="form-label">Precio</label>
+            <input type="text" class="form-control" id="inputPrecio" name="precio" #precio="ngModel"
+            [(ngModel)]="productoModelPost.precio">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="postProductos()">Agregar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
